@@ -1,0 +1,18 @@
+<div appReveal class="mx-auto mb-14 max-w-2xl text-center">
+  @if (eyebrow()) {
+    <div class="inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.3em] text-brand-orange">
+      <span class="h-px w-8 bg-gradient-to-r from-transparent to-brand-orange"></span>
+      {{ eyebrow() }}
+      <span class="h-px w-8 bg-gradient-to-l from-transparent to-brand-orange"></span>
+    </div>
+  }
+  <h2 class="mt-4 font-display text-4xl font-bold leading-tight sm:text-5xl" [class]="light() ? 'text-white' : 'text-brand-navy'">{{ title() }}</h2>
+  <div class="mx-auto mt-5 flex items-center justify-center gap-2">
+    <span class="h-1 w-10 rounded-full bg-brand-blue"></span>
+    <span class="h-2 w-2 rotate-45 bg-brand-orange"></span>
+    <span class="h-1 w-10 rounded-full bg-brand-orange"></span>
+  </div>
+  @if (subtitle()) {
+    <p class="mt-5 text-lg" [class]="light() ? 'text-slate-300' : 'text-slate-500'">{{ subtitle() }}</p>
+  }
+</div>

@@ -1,0 +1,93 @@
+<app-page-header eyebrow="Contact Us" title="Let's Talk About Your Requirements!"
+  subtitle="Looking for quality printing, customized packaging, corporate gifts, paper tube products, or interior design? We're ready to help you find suitable solutions." />
+
+<section class="bg-dots bg-slate-50 pb-24 pt-10">
+  <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-5 lg:px-8">
+
+    <!-- Info panel -->
+    <aside appReveal class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue p-8 text-white shadow-2xl shadow-brand-navy/30 lg:col-span-2 sm:p-10">
+      <div class="absolute -bottom-16 -right-16 h-56 w-56 rounded-full bg-brand-orange/30 blur-3xl"></div>
+      <h2 class="relative font-display text-3xl font-bold">Company Information</h2>
+      <p class="relative mt-2 text-slate-200">{{ site.name }}</p>
+
+      <ul class="relative mt-8 space-y-6 text-sm">
+        @for (a of site.addresses; track a.text) {
+          <li class="flex gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15"><app-icon name="map-pin" class="h-5 w-5 text-orange-300" /></span>
+            <span><span class="block font-semibold">{{ a.label }}</span><span class="text-slate-200">{{ a.text }}</span></span>
+          </li>
+        }
+        <li class="flex gap-4">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15"><app-icon name="phone" class="h-5 w-5 text-orange-300" /></span>
+          <span><span class="block font-semibold">Mobile</span><a class="text-slate-200 hover:text-orange-300" [href]="'tel:' + clean(site.mobile)">{{ site.mobile }}</a></span>
+        </li>
+        <li class="flex gap-4">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15"><app-icon name="message-circle" class="h-5 w-5 text-orange-300" /></span>
+          <span><span class="block font-semibold">WhatsApp</span><a class="text-slate-200 hover:text-orange-300" [href]="site.whatsappLink" target="_blank" rel="noopener">{{ site.whatsapp }}</a></span>
+        </li>
+        <li class="flex gap-4">
+          <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15"><app-icon name="mail" class="h-5 w-5 text-orange-300" /></span>
+          <span><span class="block font-semibold">Email</span>
+            @for (e of site.emails; track e) { <a class="block break-all text-slate-200 hover:text-orange-300" [href]="'mailto:' + e">{{ e }}</a> }
+          </span>
+        </li>
+        @if (site.hours) {
+          <li class="flex gap-4">
+            <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/15"><app-icon name="clock" class="h-5 w-5 text-orange-300" /></span>
+            <span><span class="block font-semibold">Business Hours</span><span class="text-slate-200">{{ site.hours }}</span></span>
+          </li>
+        }
+      </ul>
+    </aside>
+
+    <!-- Form -->
+    <form appReveal [formGroup]="form" (ngSubmit)="submit()" class="rounded-[2rem] bg-white p-8 shadow-2xl shadow-brand-navy/10 ring-1 ring-slate-200/70 sm:p-10 lg:col-span-3">
+      <h2 class="font-display text-3xl font-bold text-brand-navy">Send Your Inquiry</h2>
+      <p class="mt-1 text-slate-500">Tell us what you need — we'll get back to you with a quotation.</p>
+
+      <div class="mt-8 grid gap-5 sm:grid-cols-2">
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Full Name *</label>
+          <input formControlName="fullName" class="input" placeholder="Your name" />
+          @if (invalid('fullName')) { <p class="mt-1 text-xs text-red-600">Please enter your name.</p> }
+        </div>
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Company Name (Optional)</label>
+          <input formControlName="company" class="input" placeholder="Company" />
+        </div>
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Phone Number *</label>
+          <input formControlName="phone" type="tel" class="input" placeholder="+880 ..." />
+          @if (invalid('phone')) { <p class="mt-1 text-xs text-red-600">Please enter your phone number.</p> }
+        </div>
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Email Address</label>
+          <input formControlName="email" type="email" class="input" placeholder="you&#64;example.com" />
+          @if (invalid('email')) { <p class="mt-1 text-xs text-red-600">Enter a valid email.</p> }
+        </div>
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Interested Product or Service</label>
+          <select formControlName="interest" class="input">
+            <option value="">Select…</option>
+            @for (o of interests; track o) { <option [value]="o">{{ o }}</option> }
+          </select>
+        </div>
+        <div>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Order Quantity (if applicable)</label>
+          <input formControlName="quantity" class="input" placeholder="e.g. 500 pcs" />
+        </div>
+      </div>
+
+      <div class="mt-5">
+        <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Message *</label>
+        <textarea formControlName="message" rows="5" class="input" placeholder="Tell us about your requirements…"></textarea>
+        @if (invalid('message')) { <p class="mt-1 text-xs text-red-600">Please write a short message.</p> }
+      </div>
+
+      <button type="submit" class="btn-primary mt-8">Submit Your Inquiry <app-icon name="send" class="h-5 w-5" /></button>
+      @if (sent()) {
+        <p class="mt-5 flex items-center gap-2 rounded-xl bg-green-50 p-4 text-sm text-green-700"><app-icon name="circle-check" class="h-5 w-5" />Thank you! Our team will review your inquiry and get back to you.</p>
+      }
+    </form>
+  </div>
+</section>

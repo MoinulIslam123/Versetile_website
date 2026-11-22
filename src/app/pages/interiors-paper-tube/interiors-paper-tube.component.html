@@ -1,0 +1,53 @@
+<app-page-header eyebrow="Interiors & Paper Tube" title="Interior Design & Paper Tube Solutions" />
+
+<!-- Interiors -->
+<section class="bg-white pb-24 pt-10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div appReveal class="mx-auto mb-14 max-w-3xl text-center">
+      <div class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue to-brand-navy text-white shadow-lg shadow-brand-blue/30"><app-icon name="sofa" class="h-8 w-8" /></div>
+      <h2 class="mt-5 font-display text-4xl font-bold text-brand-navy">Interiors & Interior Design</h2>
+      <p class="mt-4 text-lg leading-relaxed text-slate-500">{{ interiorsIntro() }}</p>
+    </div>
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (s of interiors(); track s.title) {
+        <div appReveal class="card-p group">
+          <div class="icon-tile"><app-icon [name]="s.icon" class="h-6 w-6" /></div>
+          <h3 class="mt-5 font-display text-lg font-bold text-brand-navy">{{ s.title }}</h3>
+          <p class="mt-2 text-slate-500">{{ s.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Paper tube -->
+<section class="relative isolate overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue py-24 text-white">
+  <div class="bg-grid-dark absolute inset-0 -z-10"></div>
+  <div class="absolute -left-20 top-10 -z-10 h-80 w-80 animate-float-slow rounded-full bg-brand-orange/25 blur-3xl"></div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div appReveal class="mx-auto mb-14 max-w-3xl text-center">
+      <div class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff7a45] shadow-lg shadow-brand-orange/40"><app-icon name="scroll" class="h-8 w-8" /></div>
+      <h2 class="mt-5 font-display text-4xl font-bold">Paper Tube Solutions</h2>
+      <p class="mt-4 text-lg leading-relaxed text-slate-200">{{ tubeIntro() }}</p>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      @for (s of tube(); track s.title) {
+        <div appReveal class="rounded-3xl border border-white/15 bg-white/10 p-8 backdrop-blur transition duration-500 hover:-translate-y-2 hover:bg-white/15">
+          <app-icon [name]="s.icon" class="h-8 w-8 text-orange-300" />
+          <h3 class="mt-4 font-display text-xl font-bold">{{ s.title }}</h3>
+          <p class="mt-2 text-slate-300">{{ s.text }}</p>
+        </div>
+      }
+    </div>
+
+    <h3 class="mt-14 text-center font-display text-2xl font-bold">Our Paper Tube Products</h3>
+    <div class="mt-6 flex flex-wrap justify-center gap-3">
+      @for (i of tubeProducts(); track i) {
+        <span class="rounded-full border border-white/20 bg-white/10 px-5 py-2 text-sm font-medium backdrop-blur transition hover:bg-brand-orange">{{ i }}</span>
+      }
+    </div>
+    <p class="mt-10 text-center text-slate-300">Contact our team to discuss your required product type, dimensions, quantity, and customization preferences.</p>
+    <div class="mt-6 text-center"><a routerLink="/contact" class="btn-primary">Request a Quote <app-icon name="arrow-right" class="h-5 w-5" /></a></div>
+  </div>
+</section>

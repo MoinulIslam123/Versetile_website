@@ -1,0 +1,99 @@
+<div class="flex flex-wrap items-end justify-between gap-4">
+  <div>
+    <h1 class="font-display text-3xl font-bold text-brand-navy">Products</h1>
+    <p class="text-slate-500">Manage the product groups (tabs) and the products inside each one.</p>
+  </div>
+</div>
+
+@if (error) { <p class="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">{{ error }}</p> }
+
+<div class="mt-6 grid gap-6 xl:grid-cols-[360px_1fr]">
+
+  <!-- Categories -->
+  <section class="h-fit rounded-3xl bg-white p-5 shadow-md">
+    <div class="mb-4 flex items-center justify-between">
+      <h2 class="font-display text-xl font-bold text-brand-navy">Categories</h2>
+      <button type="button" (click)="newCategory()" class="btn-primary !px-4 !py-2 text-sm"><app-icon name="plus" class="h-4 w-4" />Add</button>
+    </div>
+
+    @if (catForm) {
+      <form (ngSubmit)="saveCategory()" class="mb-4 space-y-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200">
+        <input class="input" name="cname" [(ngModel)]="catForm.name" placeholder="Name (e.g. Printing Products)" required />
+        <div class="grid grid-cols-2 gap-3">
+          <input class="input" name="cletter" [(ngModel)]="catForm.letter" placeholder="Letter" maxlength="5" required />
+          <input class="input" type="number" name="corder" [(ngModel)]="catForm.sortOrder" placeholder="Order" />
+        </div>
+        <div class="flex items-center gap-3">
+          <select class="input" name="cicon" [(ngModel)]="catForm.icon">@for (i of iconNames; track i) { <option [value]="i">{{ i }}</option> }</select>
+          <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-navy text-white"><app-icon [name]="catForm.icon" class="h-6 w-6" /></span>
+        </div>
+        <div class="flex gap-2">
+          <button type="submit" class="btn-primary !px-5 !py-2 text-sm" [disabled]="!catForm.name || !catForm.letter">Save</button>
+          <button type="button" (click)="catForm = null" class="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600">Cancel</button>
+        </div>
+      </form>
+    }
+
+    <ul class="space-y-2">
+      @for (c of categories; track c.id) {
+        <li class="group flex items-center gap-3 rounded-2xl p-3 ring-1 transition"
+            [class]="selected?.id === c.id ? 'bg-brand-blue/5 ring-brand-blue/40' : 'ring-slate-200 hover:bg-slate-50'">
+          <button type="button" (click)="select(c)" class="flex min-w-0 flex-1 items-center gap-3 text-left">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-blue to-brand-navy text-white"><app-icon [name]="c.icon" class="h-5 w-5" /></span>
+            <span class="min-w-0"><span class="block truncate font-semibold text-brand-navy">{{ c.letter }}. {{ c.name }}</span><span class="text-xs text-slate-400">Order {{ c.sortOrder }}</span></span>
+          </button>
+          <button type="button" (click)="editCategory(c)" class="rounded-lg px-2 py-1 text-xs font-semibold text-brand-blue hover:bg-brand-blue/10">Edit</button>
+          <button type="button" (click)="deleteCategory(c)" class="rounded-lg px-2 py-1 text-xs font-semibold text-red-500 hover:bg-red-50">Delete</button>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- Products of the selected category -->
+  <section class="rounded-3xl bg-white p-5 shadow-md sm:p-6">
+    @if (selected) {
+      <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <h2 class="font-display text-xl font-bold text-brand-navy">{{ selected.name }} <span class="text-sm font-normal text-slate-400">({{ products.length }})</span></h2>
+        <button type="button" (click)="newProduct()" class="btn-primary !px-4 !py-2 text-sm"><app-icon name="plus" class="h-4 w-4" />Add product</button>
+      </div>
+
+      @if (prodForm) {
+        <form (ngSubmit)="saveProduct()" class="mb-5 grid gap-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-slate-200 sm:grid-cols-[1fr_110px_auto]">
+          <input class="input" name="pname" [(ngModel)]="prodForm.name" placeholder="Product name" required />
+          <input class="input" type="number" name="porder" [(ngModel)]="prodForm.sortOrder" placeholder="Order" />
+          <label class="flex items-center gap-2 text-sm font-medium text-slate-600"><input type="checkbox" name="pactive" [(ngModel)]="prodForm.isActive" class="h-4 w-4 accent-[#e8542d]" />Visible</label>
+          <div class="flex gap-2 sm:col-span-3">
+            <button type="submit" class="btn-primary !px-5 !py-2 text-sm" [disabled]="!prodForm.name">Save</button>
+            <button type="button" (click)="prodForm = null" class="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-600">Cancel</button>
+          </div>
+        </form>
+      }
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm">
+          <thead class="text-xs uppercase tracking-wider text-slate-400"><tr><th class="py-2 pr-3">#</th><th class="py-2 pr-3">Name</th><th class="py-2 pr-3">Status</th><th class="py-2 text-right">Actions</th></tr></thead>
+          <tbody>
+            @for (p of products; track p.id) {
+              <tr class="border-t border-slate-100">
+                <td class="py-3 pr-3 text-slate-400">{{ p.sortOrder }}</td>
+                <td class="py-3 pr-3 font-medium text-brand-navy" [class.opacity-50]="!p.isActive">{{ p.name }}</td>
+                <td class="py-3 pr-3">
+                  <button type="button" (click)="toggleActive(p)" class="rounded-full px-3 py-1 text-xs font-semibold"
+                          [class]="p.isActive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'">{{ p.isActive ? 'Visible' : 'Hidden' }}</button>
+                </td>
+                <td class="py-3 text-right whitespace-nowrap">
+                  <button type="button" (click)="editProduct(p)" class="rounded-lg px-2 py-1 text-xs font-semibold text-brand-blue hover:bg-brand-blue/10">Edit</button>
+                  <button type="button" (click)="deleteProduct(p)" class="rounded-lg px-2 py-1 text-xs font-semibold text-red-500 hover:bg-red-50">Delete</button>
+                </td>
+              </tr>
+            } @empty {
+              <tr><td colspan="4" class="py-8 text-center text-slate-400">No products yet — click “Add product”.</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    } @else {
+      <p class="py-10 text-center text-slate-400">Add a category to start.</p>
+    }
+  </section>
+</div>

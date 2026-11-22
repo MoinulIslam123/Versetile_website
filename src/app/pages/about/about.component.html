@@ -1,0 +1,48 @@
+<app-page-header eyebrow="About Us" title="Who We Are" />
+
+<section class="bg-white py-24">
+  <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <div appReveal class="space-y-5 text-lg leading-relaxed text-slate-600">
+      <p><span class="font-semibold text-brand-navy">Versatile Support & Supply</span> is a multi-service business providing solutions in Printing, Packaging, Corporate & Promotional Gift Items, Business & Office Accessories, Interior Design & Decoration, and Paper Tube Products.</p>
+      <p>We serve corporate organizations, businesses, retailers, institutions, and individual customers with a wide range of products and professional services.</p>
+      <p>Our objective is to make sourcing easier by offering multiple product categories and services under one business platform — quality products, attractive presentation, functional spaces, and dependable service.</p>
+    </div>
+
+    <figure appReveal class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-navy to-brand-blue p-10 text-white shadow-2xl shadow-brand-navy/30">
+      <app-icon name="quote" class="h-14 w-14 text-brand-orange/80" />
+      <h3 class="mt-4 font-display text-2xl font-bold">Our Business Philosophy</h3>
+      <p class="mt-4 text-lg leading-relaxed text-slate-200">We believe in delivering more than just products. We aim to provide value, convenience, and practical solutions that help our customers present their brands professionally and bring their ideas to life.</p>
+      <div class="absolute -bottom-10 -right-10 h-40 w-40 rounded-full bg-brand-orange/30 blur-3xl"></div>
+    </figure>
+  </div>
+</section>
+
+<section class="bg-dots bg-slate-50 py-24">
+  <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 md:grid-cols-2 lg:px-8">
+    <article appReveal class="card-p group p-10">
+      <div class="icon-tile"><app-icon name="target" class="h-7 w-7" /></div>
+      <h3 class="mt-6 font-display text-3xl font-bold text-brand-navy">Our Mission</h3>
+      <p class="mt-4 leading-relaxed">To deliver high-quality printing, packaging, customized gift solutions, paper tube products, and interior design services that meet the diverse needs of our clients with excellence and precision. We are committed to combining creativity, innovation, and appropriate technology to provide products and services that reflect quality, professionalism, and value.</p>
+    </article>
+    <article appReveal class="card-p group p-10">
+      <div class="icon-tile"><app-icon name="eye" class="h-7 w-7" /></div>
+      <h3 class="mt-6 font-display text-3xl font-bold text-brand-navy">Our Vision</h3>
+      <p class="mt-4 leading-relaxed">To become one of the most trusted, recognized, and preferred providers of printing, packaging, corporate gift, interior design, and paper tube solutions in Bangladesh — growing as a leading business partner by embracing modern technology, creative designs, and industry best practices, and building long-term relationships based on trust, integrity, and mutual success.</p>
+    </article>
+  </div>
+</section>
+
+<section class="bg-white py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <app-section-heading eyebrow="What Guides Us" title="Our Core Values" />
+    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (v of values; track v.title; let i = $index) {
+        <div appReveal class="card-p group">
+          <div class="icon-tile"><app-icon [name]="valueIcons[i]" class="h-6 w-6" /></div>
+          <h4 class="mt-5 font-display text-xl font-bold text-brand-navy">{{ v.title }}</h4>
+          <p class="mt-2 text-slate-500">{{ v.text }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

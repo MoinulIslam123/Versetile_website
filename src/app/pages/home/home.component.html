@@ -1,0 +1,87 @@
+<app-hero />
+
+<!-- Marquee -->
+<div class="overflow-hidden border-y border-slate-200 bg-slate-50 py-5">
+  <div class="flex w-max animate-marquee gap-12 whitespace-nowrap">
+    @for (m of marquee; track $index) {
+      <span class="flex items-center gap-3 font-display text-xl font-semibold text-brand-navy/70">
+        <app-icon [name]="m.icon" class="h-5 w-5 text-brand-orange" />{{ m.title }}
+        <span class="ml-9 h-1.5 w-1.5 rotate-45 bg-brand-orange/60"></span>
+      </span>
+    }
+  </div>
+</div>
+
+<!-- Interiors & Paper Tube -->
+<section class="bg-white py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <app-section-heading eyebrow="Beyond Printing" title="Interiors & Paper Tube Solutions" />
+    <div class="grid gap-8 lg:grid-cols-2">
+      <article appReveal class="group relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-navy to-brand-blue p-10 text-white shadow-2xl shadow-brand-navy/30 transition duration-500 hover:-translate-y-2">
+        <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-brand-orange/30 blur-3xl transition group-hover:scale-150"></div>
+        <div class="grid h-16 w-16 place-items-center rounded-2xl bg-white/15 backdrop-blur"><app-icon name="sofa" class="h-8 w-8" /></div>
+        <h3 class="mt-6 font-display text-3xl font-bold">Interiors & Interior Design</h3>
+        <p class="mt-4 leading-relaxed text-slate-200">We provide creative, functional, and modern interior design and decoration solutions for residential, commercial, exhibition, and corporate spaces. We work closely with our clients to create thoughtful spaces that are visually powerful, intellectually elegant, and timeless.</p>
+        <a routerLink="/interiors" class="mt-8 inline-flex items-center gap-2 font-semibold text-orange-300">Explore interiors <app-icon name="arrow-right" class="h-5 w-5 transition group-hover:translate-x-2" /></a>
+      </article>
+
+      <article appReveal class="group relative overflow-hidden rounded-[2rem] bg-slate-50 p-10 shadow-xl ring-1 ring-slate-200 transition duration-500 hover:-translate-y-2">
+        <div class="absolute -right-10 -top-10 h-48 w-48 rounded-full bg-brand-blue/10 blur-3xl transition group-hover:scale-150"></div>
+        <div class="grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff7a45] text-white shadow-lg shadow-brand-orange/30"><app-icon name="scroll" class="h-8 w-8" /></div>
+        <h3 class="mt-6 font-display text-3xl font-bold text-brand-navy">Paper Tube Solutions</h3>
+        <p class="mt-4 leading-relaxed text-slate-600">We offer paper tube products and customized paper tube packaging options for different business and product requirements. Customers can discuss their preferred sizes, specifications, printing, and finishing requirements with our team.</p>
+        <a routerLink="/interiors" class="mt-8 inline-flex items-center gap-2 font-semibold text-brand-orange">Explore paper tubes <app-icon name="arrow-right" class="h-5 w-5 transition group-hover:translate-x-2" /></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- What we offer -->
+<section class="bg-dots bg-slate-50 py-24">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <app-section-heading eyebrow="Our Strengths" title="What We Offer" />
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      @for (o of offers; track o.title; let i = $index) {
+        <div appReveal class="card-p group">
+          <span class="absolute right-5 top-4 font-display text-5xl font-bold text-slate-100 transition group-hover:text-brand-orange/20">{{ i < 9 ? '0' + (i + 1) : i + 1 }}</span>
+          <div class="icon-tile"><app-icon [name]="o.icon" class="h-6 w-6" /></div>
+          <h3 class="mt-5 font-display text-lg font-bold text-brand-navy">{{ o.title }}</h3>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Why choose us -->
+<section class="bg-white py-24">
+  <div class="mx-auto grid max-w-7xl items-center gap-14 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+    <div appReveal>
+      <span class="text-xs font-semibold uppercase tracking-[0.3em] text-brand-orange">Why Choose Us</span>
+      <h2 class="mt-4 font-display text-4xl font-bold leading-tight text-brand-navy sm:text-5xl">Quality, creativity and care in every order.</h2>
+      <p class="mt-5 text-lg text-slate-500">Everything you need for printing, packaging, gifting and interiors — under one trusted partner.</p>
+      <a routerLink="/why-choose-us" class="btn-primary mt-8">Learn more <app-icon name="arrow-right" class="h-5 w-5" /></a>
+    </div>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      @for (w of reasons; track w) {
+        <li appReveal class="flex items-start gap-3 rounded-2xl bg-slate-50 p-5 ring-1 ring-slate-200/70 transition hover:-translate-y-1 hover:bg-white hover:shadow-xl">
+          <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-orange/10 text-brand-orange"><app-icon name="check" class="h-4 w-4" /></span>
+          <span class="font-medium text-brand-navy">{{ w }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="relative isolate overflow-hidden bg-gradient-to-r from-brand-navy via-[#16307a] to-brand-blue py-24 text-center text-white">
+  <div class="bg-grid-dark absolute inset-0 -z-10"></div>
+  <div class="absolute left-1/2 top-0 -z-10 h-72 w-72 -translate-x-1/2 rounded-full bg-brand-orange/30 blur-3xl"></div>
+  <div appReveal class="mx-auto max-w-3xl px-4">
+    <h2 class="font-display text-4xl font-bold sm:text-5xl">Let's Build Something Great Together!</h2>
+    <p class="mt-5 text-lg text-slate-200">Contact us today to discuss your product requirements, interior projects, and business inquiries.</p>
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <a routerLink="/contact" class="btn-primary">Contact Us <app-icon name="arrow-right" class="h-5 w-5" /></a>
+      <a routerLink="/products" class="btn-ghost">Browse Products</a>
+    </div>
+  </div>
+</section>

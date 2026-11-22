@@ -1,0 +1,24 @@
+<app-page-header eyebrow="Gallery" title="Our Products & Projects"
+  subtitle="Printing, packaging, paper tube, corporate gift items, and completed interior projects." />
+
+<section class="bg-white pb-24 pt-10">
+  <div class="mx-auto grid max-w-7xl grid-cols-2 gap-5 px-4 sm:px-6 lg:grid-cols-3 lg:px-8">
+    @for (g of items; track g.title; let i = $index) {
+      <figure appReveal class="group relative overflow-hidden rounded-3xl shadow-xl shadow-brand-navy/10"
+              [class]="i % 5 === 0 ? 'aspect-[4/3] lg:row-span-1' : 'aspect-[4/3]'">
+        @if (g.src) {
+          <img [src]="g.src" [alt]="g.title" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover:scale-110" />
+        } @else {
+          <div class="bg-grid-dark grid h-full w-full place-items-center bg-gradient-to-br from-brand-blue via-[#16307a] to-brand-navy transition duration-700 group-hover:scale-110">
+            <app-icon [name]="g.icon" class="h-16 w-16 text-white/80" />
+          </div>
+        }
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/20 to-transparent opacity-80 transition group-hover:opacity-100"></div>
+        <figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 text-white">
+          <span class="font-display text-lg font-bold sm:text-xl">{{ g.title }}</span>
+          <span class="grid h-10 w-10 translate-y-4 place-items-center rounded-full bg-brand-orange opacity-0 transition duration-500 group-hover:translate-y-0 group-hover:opacity-100"><app-icon name="arrow-up-right" class="h-5 w-5" /></span>
+        </figcaption>
+      </figure>
+    }
+  </div>
+</section>

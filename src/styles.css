@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-white font-sans text-slate-600 antialiased; }
+  h1, h2, h3 { font-family: theme('fontFamily.display'); }
+  ::selection { background: #e8542d; color: #fff; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-brand-orange to-[#ff7a45] px-7 py-3 font-semibold text-white shadow-lg shadow-brand-orange/30 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl hover:shadow-brand-orange/40;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3 font-semibold text-white backdrop-blur transition hover:bg-white/10;
+  }
+  .card-p {
+    @apply relative overflow-hidden rounded-3xl bg-white p-7 ring-1 ring-slate-200/70 shadow-[0_10px_40px_-18px_rgba(15,31,74,.25)] transition duration-500 hover:-translate-y-2 hover:shadow-[0_28px_60px_-20px_rgba(43,74,155,.45)];
+  }
+  .card-p::before {
+    content: '';
+    @apply absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-gradient-to-r from-brand-blue to-brand-orange transition-transform duration-500;
+  }
+  .card-p:hover::before { @apply scale-x-100; }
+  .icon-tile {
+    @apply grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue to-brand-navy text-white shadow-lg shadow-brand-blue/30 transition duration-500;
+  }
+  .card-p:hover .icon-tile { @apply rotate-6 from-brand-orange to-[#ff7a45] shadow-brand-orange/40; }
+  .bg-dots { background-image: radial-gradient(rgba(43, 74, 155, .13) 1px, transparent 1px); background-size: 22px 22px; }
+  .bg-grid-dark {
+    background-image: linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .text-gradient { @apply bg-gradient-to-r from-orange-300 via-brand-orange to-[#ff7a45] bg-clip-text text-transparent; }
+  .input {
+    @apply w-full rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-brand-blue focus:bg-white focus:ring-4 focus:ring-brand-blue/10;
+  }
+}
+
+/* scroll reveal (see shared/reveal.directive.ts) */
+.reveal { opacity: 0; }
+.reveal.in-view { opacity: 1; animation: rise .9s cubic-bezier(.2, .7, .2, 1) backwards; }
+.reveal.in-view:nth-child(4n+2) { animation-delay: .08s; }
+.reveal.in-view:nth-child(4n+3) { animation-delay: .16s; }
+.reveal.in-view:nth-child(4n+4) { animation-delay: .24s; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; }
+  .reveal.in-view { animation: none; }
+}

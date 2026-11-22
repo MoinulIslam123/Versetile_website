@@ -1,0 +1,30 @@
+<app-page-header eyebrow="FAQ" title="Frequently Asked Questions" />
+
+<section class="bg-white pb-24 pt-10">
+  <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_340px] lg:px-8">
+    <div class="space-y-4">
+      @for (f of faqs; track f.q; let i = $index) {
+        <div appReveal class="overflow-hidden rounded-2xl bg-white ring-1 transition duration-300"
+             [class]="open() === i ? 'shadow-xl ring-brand-blue/30' : 'ring-slate-200 hover:shadow-md'">
+          <button type="button" (click)="toggle(i)" class="flex w-full items-center gap-4 px-6 py-5 text-left">
+            <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full font-display text-sm font-bold transition"
+                  [class]="open() === i ? 'bg-brand-orange text-white' : 'bg-brand-blue/10 text-brand-blue'">{{ i + 1 }}</span>
+            <span class="flex-1 font-display text-lg font-bold text-brand-navy">{{ f.q }}</span>
+            <app-icon name="chevron-down" class="h-5 w-5 text-brand-orange transition-transform duration-300" [class.rotate-180]="open() === i" />
+          </button>
+          <div class="grid transition-all duration-300" [class]="open() === i ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'">
+            <div class="overflow-hidden"><p class="px-6 pb-6 pl-[4.5rem] leading-relaxed text-slate-500">{{ f.a }}</p></div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <aside appReveal class="h-fit rounded-3xl bg-gradient-to-br from-brand-navy to-brand-blue p-8 text-white shadow-2xl shadow-brand-navy/30 lg:sticky lg:top-28">
+      <div class="grid h-14 w-14 place-items-center rounded-2xl bg-white/15"><app-icon name="message-circle" class="h-7 w-7" /></div>
+      <h3 class="mt-5 font-display text-2xl font-bold">Still have questions?</h3>
+      <p class="mt-2 text-slate-200">Our team will review your inquiry and get back to you.</p>
+      <a [href]="site.whatsappLink" target="_blank" rel="noopener" class="btn-primary mt-6 w-full justify-center">Chat on WhatsApp</a>
+      <a routerLink="/contact" class="btn-ghost mt-3 w-full justify-center">Send an Inquiry</a>
+    </aside>
+  </div>
+</section>
