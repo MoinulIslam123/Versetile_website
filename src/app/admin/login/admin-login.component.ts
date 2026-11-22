@@ -29,9 +29,12 @@ export class AdminLoginComponent {
     this.loading = true;
     this.auth.login(this.username, this.password).subscribe({
       next: () => this.router.navigate(['/admin']),
-      error: err => {
+      error: (err) => {
         this.loading = false;
-        this.error = err.status === 401 ? 'Invalid username or password.' : 'Cannot reach the server. Is the API running?';
+        this.error =
+          err.status === 401
+            ? 'Invalid username or password.'
+            : 'Cannot reach the server. Is the API running?';
       },
     });
   }

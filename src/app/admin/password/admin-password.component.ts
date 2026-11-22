@@ -19,10 +19,17 @@ export class AdminPasswordComponent {
 
   save() {
     this.message = this.error = '';
-    if (this.next !== this.confirm) { this.error = 'The new passwords do not match.'; return; }
+    if (this.next !== this.confirm) {
+      this.error = 'The new passwords do not match.';
+      return;
+    }
     this.auth.changePassword(this.current, this.next).subscribe({
-      next: () => { this.message = 'Password changed.'; this.current = this.next = this.confirm = ''; },
-      error: err => (this.error = err.error?.message ?? 'Could not change the password.'),
+      next: () => {
+        this.message = 'Password changed.';
+        this.current = this.next = this.confirm = '';
+      },
+      error: (err) =>
+        (this.error = err.error?.message ?? 'Could not change the password.'),
     });
   }
 }

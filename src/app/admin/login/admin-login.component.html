@@ -1,25 +1,67 @@
-<div class="relative isolate grid min-h-screen place-items-center overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue px-4">
+<div
+  class="relative isolate grid min-h-screen place-items-center overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue px-4"
+>
   <div class="bg-grid-dark absolute inset-0 -z-10"></div>
-  <div class="absolute -right-20 -top-20 -z-10 h-96 w-96 rounded-full bg-brand-orange/25 blur-3xl"></div>
+  <div
+    class="absolute -right-20 -top-20 -z-10 h-96 w-96 rounded-full bg-brand-orange/25 blur-3xl"
+  ></div>
 
-  <form (ngSubmit)="submit()" class="w-full max-w-md rounded-[2rem] bg-white p-10 shadow-2xl">
+  <form
+    (ngSubmit)="submit()"
+    class="w-full max-w-md rounded-[2rem] bg-white p-10 shadow-2xl"
+  >
     <div class="text-center">
-      <div class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue to-brand-navy text-white shadow-lg"><app-icon name="shield-check" class="h-8 w-8" /></div>
-      <h1 class="mt-5 font-display text-3xl font-bold text-brand-navy">Admin Login</h1>
+      <div
+        class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue to-brand-navy text-white shadow-lg"
+      >
+        <app-icon name="shield-check" class="h-8 w-8" />
+      </div>
+      <h1 class="mt-5 font-display text-3xl font-bold text-brand-navy">
+        Admin Login
+      </h1>
       <p class="mt-1 text-sm text-slate-500">Versatile Support & Supply</p>
     </div>
 
-    <label class="mt-8 mb-1.5 block text-sm font-semibold text-brand-navy">Username</label>
-    <input class="input" name="username" [(ngModel)]="username" autocomplete="username" required />
+    <label class="mt-8 mb-1.5 block text-sm font-semibold text-brand-navy"
+      >Username</label
+    >
+    <input
+      class="input"
+      name="username"
+      [(ngModel)]="username"
+      autocomplete="username"
+      required
+    />
 
-    <label class="mt-5 mb-1.5 block text-sm font-semibold text-brand-navy">Password</label>
-    <input class="input" type="password" name="password" [(ngModel)]="password" autocomplete="current-password" required />
+    <label class="mt-5 mb-1.5 block text-sm font-semibold text-brand-navy"
+      >Password</label
+    >
+    <input
+      class="input"
+      type="password"
+      name="password"
+      [(ngModel)]="password"
+      autocomplete="current-password"
+      required
+    />
 
-    @if (error) { <p class="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">{{ error }}</p> }
+    @if (error) {
+      <p class="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">
+        {{ error }}
+      </p>
+    }
 
-    <button type="submit" class="btn-primary mt-7 w-full justify-center disabled:opacity-60" [disabled]="loading || !username || !password">
-      {{ loading ? 'Signing in…' : 'Sign In' }}
+    <button
+      type="submit"
+      class="btn-primary mt-7 w-full justify-center disabled:opacity-60"
+      [disabled]="loading || !username || !password"
+    >
+      {{ loading ? "Signing in…" : "Sign In" }}
     </button>
-    <a routerLink="/" class="mt-5 block text-center text-sm text-slate-500 hover:text-brand-orange">← Back to website</a>
+    <a
+      routerLink="/"
+      class="mt-5 block text-center text-sm text-slate-500 hover:text-brand-orange"
+      >← Back to website</a
+    >
   </form>
 </div>

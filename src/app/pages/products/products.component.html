@@ -1,47 +1,86 @@
-<app-page-header eyebrow="Products" title="Explore Our Product Collection"
-  subtitle="A wide range of printing, packaging, corporate gift, promotional, and office products for your personal and business needs." />
+<app-page-header
+  eyebrow="Products"
+  title="Explore Our Product Collection"
+  subtitle="A wide range of printing, packaging, corporate gift, promotional, and office products for your personal and business needs."
+/>
 
 <section class="bg-dots bg-slate-50 pb-24 pt-10">
   <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-
     <div class="mb-10 flex flex-wrap justify-center gap-3">
       @for (p of products(); track p.id) {
-        <button type="button" (click)="active.set(p.id)"
+        <button
+          type="button"
+          (click)="active.set(p.id)"
           class="flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold ring-1 transition duration-300"
-          [class]="active() === p.id
-            ? 'bg-gradient-to-r from-brand-blue to-brand-navy text-white shadow-lg shadow-brand-blue/30 ring-transparent'
-            : 'bg-white text-slate-600 ring-slate-200 hover:-translate-y-0.5 hover:text-brand-blue hover:shadow-md'">
+          [class]="
+            active() === p.id
+              ? 'bg-gradient-to-r from-brand-blue to-brand-navy text-white shadow-lg shadow-brand-blue/30 ring-transparent'
+              : 'bg-white text-slate-600 ring-slate-200 hover:-translate-y-0.5 hover:text-brand-blue hover:shadow-md'
+          "
+        >
           <app-icon [name]="p.icon" class="h-4 w-4" />{{ p.title }}
         </button>
       }
     </div>
 
     <div class="grid gap-8 lg:grid-cols-[320px_1fr]">
-      <aside class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-navy to-brand-blue p-8 text-white shadow-2xl shadow-brand-navy/30">
-        <span class="absolute -right-4 -top-8 font-display text-[10rem] font-bold leading-none text-white/10">{{ current().letter }}</span>
+      <aside
+        class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-brand-navy to-brand-blue p-8 text-white shadow-2xl shadow-brand-navy/30"
+      >
+        <span
+          class="absolute -right-4 -top-8 font-display text-[10rem] font-bold leading-none text-white/10"
+          >{{ current().letter }}</span
+        >
         <div class="relative">
-          <div class="grid h-16 w-16 place-items-center rounded-2xl bg-white/15 backdrop-blur"><app-icon [name]="current().icon" class="h-8 w-8" /></div>
-          <h2 class="mt-6 font-display text-3xl font-bold leading-tight">{{ current().title }}</h2>
-          <p class="mt-3 text-slate-200">{{ current().items.length }} products & services</p>
-          <a routerLink="/contact" class="btn-primary mt-8">Request a Quote <app-icon name="arrow-right" class="h-5 w-5" /></a>
+          <div
+            class="grid h-16 w-16 place-items-center rounded-2xl bg-white/15 backdrop-blur"
+          >
+            <app-icon [name]="current().icon" class="h-8 w-8" />
+          </div>
+          <h2 class="mt-6 font-display text-3xl font-bold leading-tight">
+            {{ current().title }}
+          </h2>
+          <p class="mt-3 text-slate-200">
+            {{ current().items.length }} products & services
+          </p>
+          <a routerLink="/contact" class="btn-primary mt-8"
+            >Request a Quote <app-icon name="arrow-right" class="h-5 w-5"
+          /></a>
         </div>
       </aside>
 
       <div class="grid content-start gap-3 sm:grid-cols-2">
         @for (item of current().items; track item) {
-          <div class="group flex items-start gap-3 rounded-2xl bg-white p-5 ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-brand-orange/40">
-            <span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-orange/10 text-brand-orange transition group-hover:bg-brand-orange group-hover:text-white"><app-icon name="check" class="h-4 w-4" /></span>
+          <div
+            class="group flex items-start gap-3 rounded-2xl bg-white p-5 ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:ring-brand-orange/40"
+          >
+            <span
+              class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-orange/10 text-brand-orange transition group-hover:bg-brand-orange group-hover:text-white"
+              ><app-icon name="check" class="h-4 w-4"
+            /></span>
             <span class="font-medium text-brand-navy">{{ item }}</span>
           </div>
         }
       </div>
     </div>
 
-    <div appReveal class="relative mt-16 overflow-hidden rounded-[2rem] bg-gradient-to-r from-brand-navy to-brand-blue p-10 text-center text-white shadow-2xl">
-      <div class="absolute -top-16 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-brand-orange/30 blur-3xl"></div>
-      <h3 class="relative font-display text-3xl font-bold">Need Something Customized?</h3>
-      <p class="relative mx-auto mt-3 max-w-2xl text-slate-200">We welcome product inquiries for customized requirements. Contact us to discuss your ideas, quantities, specifications, and preferred design.</p>
-      <a routerLink="/contact" class="btn-primary relative mt-7">Contact Us <app-icon name="arrow-right" class="h-5 w-5" /></a>
+    <div
+      appReveal
+      class="relative mt-16 overflow-hidden rounded-[2rem] bg-gradient-to-r from-brand-navy to-brand-blue p-10 text-center text-white shadow-2xl"
+    >
+      <div
+        class="absolute -top-16 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-brand-orange/30 blur-3xl"
+      ></div>
+      <h3 class="relative font-display text-3xl font-bold">
+        Need Something Customized?
+      </h3>
+      <p class="relative mx-auto mt-3 max-w-2xl text-slate-200">
+        We welcome product inquiries for customized requirements. Contact us to
+        discuss your ideas, quantities, specifications, and preferred design.
+      </p>
+      <a routerLink="/contact" class="btn-primary relative mt-7"
+        >Contact Us <app-icon name="arrow-right" class="h-5 w-5"
+      /></a>
     </div>
   </div>
 </section>

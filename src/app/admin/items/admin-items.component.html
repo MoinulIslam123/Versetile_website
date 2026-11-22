@@ -1,50 +1,134 @@
 <div class="flex flex-wrap items-end justify-between gap-4">
   <div>
     <h1 class="font-display text-3xl font-bold text-brand-navy">{{ title }}</h1>
-    <p class="text-slate-500">Edit the intro text and the items shown on the website page.</p>
+    <p class="text-slate-500">
+      Edit the intro text and the items shown on the website page.
+    </p>
   </div>
   <div class="flex gap-2">
-    <button type="button" (click)="add('Service')" class="btn-primary !px-5 !py-2.5 text-sm"><app-icon name="plus" class="h-4 w-4" />{{ hasKind ? 'Add service card' : 'Add item' }}</button>
+    <button
+      type="button"
+      (click)="add('Service')"
+      class="btn-primary !px-5 !py-2.5 text-sm"
+    >
+      <app-icon name="plus" class="h-4 w-4" />{{
+        hasKind ? "Add service card" : "Add item"
+      }}
+    </button>
     @if (hasKind) {
-      <button type="button" (click)="add('Product')" class="rounded-full border border-brand-blue px-5 py-2.5 text-sm font-semibold text-brand-blue transition hover:bg-brand-blue hover:text-white"><app-icon name="plus" class="mr-1 inline h-4 w-4" />Add product</button>
+      <button
+        type="button"
+        (click)="add('Product')"
+        class="rounded-full border border-brand-blue px-5 py-2.5 text-sm font-semibold text-brand-blue transition hover:bg-brand-blue hover:text-white"
+      >
+        <app-icon name="plus" class="mr-1 inline h-4 w-4" />Add product
+      </button>
     }
   </div>
 </div>
 
-@if (error) { <p class="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">{{ error }}</p> }
+@if (error) {
+  <p class="mt-4 rounded-xl bg-red-50 p-3 text-sm text-red-600">{{ error }}</p>
+}
 
 <!-- Intro text -->
 <section class="mt-6 rounded-3xl bg-white p-6 shadow-md">
   <h2 class="font-display text-xl font-bold text-brand-navy">Intro text</h2>
-  <textarea class="input mt-3" rows="4" name="intro" [(ngModel)]="intro"></textarea>
+  <textarea
+    class="input mt-3"
+    rows="4"
+    name="intro"
+    [(ngModel)]="intro"
+  ></textarea>
   <div class="mt-3 flex items-center gap-3">
-    <button type="button" (click)="saveIntro()" class="btn-primary !px-5 !py-2 text-sm">Save intro</button>
+    <button
+      type="button"
+      (click)="saveIntro()"
+      class="btn-primary !px-5 !py-2 text-sm"
+    >
+      Save intro
+    </button>
     <span class="text-sm text-green-600">{{ introMsg }}</span>
   </div>
 </section>
 
 <!-- Add / edit form -->
 @if (form) {
-  <form (ngSubmit)="save()" class="mt-6 space-y-4 rounded-3xl bg-white p-6 shadow-md ring-2 ring-brand-blue/30">
-    <h2 class="font-display text-xl font-bold text-brand-navy">{{ form.id ? 'Edit' : 'New' }} {{ hasKind ? form.kind : 'item' }}</h2>
+  <form
+    (ngSubmit)="save()"
+    class="mt-6 space-y-4 rounded-3xl bg-white p-6 shadow-md ring-2 ring-brand-blue/30"
+  >
+    <h2 class="font-display text-xl font-bold text-brand-navy">
+      {{ form.id ? "Edit" : "New" }} {{ hasKind ? form.kind : "item" }}
+    </h2>
     <div class="grid gap-4 sm:grid-cols-2">
-      <div class="sm:col-span-2"><label class="mb-1.5 block text-sm font-semibold text-brand-navy">Title</label><input class="input" name="title" [(ngModel)]="form.title" required /></div>
-      @if (!hasKind || form.kind === 'Service') {
-        <div class="sm:col-span-2"><label class="mb-1.5 block text-sm font-semibold text-brand-navy">Description</label><textarea class="input" rows="3" name="description" [(ngModel)]="form.description"></textarea></div>
+      <div class="sm:col-span-2">
+        <label class="mb-1.5 block text-sm font-semibold text-brand-navy"
+          >Title</label
+        ><input class="input" name="title" [(ngModel)]="form.title" required />
+      </div>
+      @if (!hasKind || form.kind === "Service") {
+        <div class="sm:col-span-2">
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy"
+            >Description</label
+          ><textarea
+            class="input"
+            rows="3"
+            name="description"
+            [(ngModel)]="form.description"
+          ></textarea>
+        </div>
         <div>
-          <label class="mb-1.5 block text-sm font-semibold text-brand-navy">Icon</label>
+          <label class="mb-1.5 block text-sm font-semibold text-brand-navy"
+            >Icon</label
+          >
           <div class="flex items-center gap-3">
-            <select class="input" name="icon" [(ngModel)]="form.icon">@for (i of iconNames; track i) { <option [value]="i">{{ i }}</option> }</select>
-            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-navy text-white"><app-icon [name]="form.icon" class="h-6 w-6" /></span>
+            <select class="input" name="icon" [(ngModel)]="form.icon">
+              @for (i of iconNames; track i) {
+                <option [value]="i">{{ i }}</option>
+              }
+            </select>
+            <span
+              class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-navy text-white"
+              ><app-icon [name]="form.icon" class="h-6 w-6"
+            /></span>
           </div>
         </div>
       }
-      <div><label class="mb-1.5 block text-sm font-semibold text-brand-navy">Order</label><input class="input" type="number" name="order" [(ngModel)]="form.sortOrder" /></div>
-      <label class="flex items-center gap-2 text-sm font-medium text-slate-600"><input type="checkbox" name="active" [(ngModel)]="form.isActive" class="h-4 w-4 accent-[#e8542d]" />Visible on website</label>
+      <div>
+        <label class="mb-1.5 block text-sm font-semibold text-brand-navy"
+          >Order</label
+        ><input
+          class="input"
+          type="number"
+          name="order"
+          [(ngModel)]="form.sortOrder"
+        />
+      </div>
+      <label class="flex items-center gap-2 text-sm font-medium text-slate-600"
+        ><input
+          type="checkbox"
+          name="active"
+          [(ngModel)]="form.isActive"
+          class="h-4 w-4 accent-[#e8542d]"
+        />Visible on website</label
+      >
     </div>
     <div class="flex gap-2">
-      <button type="submit" class="btn-primary !px-6 !py-2.5 text-sm" [disabled]="!form.title">Save</button>
-      <button type="button" (click)="form = null" class="rounded-full border border-slate-300 px-6 py-2.5 text-sm font-semibold text-slate-600">Cancel</button>
+      <button
+        type="submit"
+        class="btn-primary !px-6 !py-2.5 text-sm"
+        [disabled]="!form.title"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        (click)="form = null"
+        class="rounded-full border border-slate-300 px-6 py-2.5 text-sm font-semibold text-slate-600"
+      >
+        Cancel
+      </button>
     </div>
   </form>
 }
@@ -53,7 +137,15 @@
 <section class="mt-6 overflow-x-auto rounded-3xl bg-white p-5 shadow-md">
   <table class="w-full text-left text-sm">
     <thead class="text-xs uppercase tracking-wider text-slate-400">
-      <tr><th class="py-2 pr-3">#</th><th class="py-2 pr-3">Item</th>@if (hasKind) { <th class="py-2 pr-3">Type</th> }<th class="py-2 pr-3">Status</th><th class="py-2 text-right">Actions</th></tr>
+      <tr>
+        <th class="py-2 pr-3">#</th>
+        <th class="py-2 pr-3">Item</th>
+        @if (hasKind) {
+          <th class="py-2 pr-3">Type</th>
+        }
+        <th class="py-2 pr-3">Status</th>
+        <th class="py-2 text-right">Actions</th>
+      </tr>
     </thead>
     <tbody>
       @for (i of items; track i.id) {
@@ -61,19 +153,70 @@
           <td class="py-3 pr-3 text-slate-400">{{ i.sortOrder }}</td>
           <td class="py-3 pr-3" [class.opacity-50]="!i.isActive">
             <div class="flex items-center gap-3">
-              <span class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy text-white"><app-icon [name]="i.icon" class="h-4 w-4" /></span>
-              <span><span class="block font-semibold text-brand-navy">{{ i.title }}</span>@if (i.description) { <span class="line-clamp-1 text-xs text-slate-400">{{ i.description }}</span> }</span>
+              <span
+                class="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-gradient-to-br from-brand-blue to-brand-navy text-white"
+                ><app-icon [name]="i.icon" class="h-4 w-4"
+              /></span>
+              <span
+                ><span class="block font-semibold text-brand-navy">{{
+                  i.title
+                }}</span>
+                @if (i.description) {
+                  <span class="line-clamp-1 text-xs text-slate-400">{{
+                    i.description
+                  }}</span>
+                }
+              </span>
             </div>
           </td>
-          @if (hasKind) { <td class="py-3 pr-3"><span class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600">{{ i.kind }}</span></td> }
-          <td class="py-3 pr-3"><button type="button" (click)="toggle(i)" class="rounded-full px-3 py-1 text-xs font-semibold" [class]="i.isActive ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'">{{ i.isActive ? 'Visible' : 'Hidden' }}</button></td>
+          @if (hasKind) {
+            <td class="py-3 pr-3">
+              <span
+                class="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-600"
+                >{{ i.kind }}</span
+              >
+            </td>
+          }
+          <td class="py-3 pr-3">
+            <button
+              type="button"
+              (click)="toggle(i)"
+              class="rounded-full px-3 py-1 text-xs font-semibold"
+              [class]="
+                i.isActive
+                  ? 'bg-green-100 text-green-700'
+                  : 'bg-slate-100 text-slate-500'
+              "
+            >
+              {{ i.isActive ? "Visible" : "Hidden" }}
+            </button>
+          </td>
           <td class="py-3 text-right whitespace-nowrap">
-            <button type="button" (click)="edit(i)" class="rounded-lg px-2 py-1 text-xs font-semibold text-brand-blue hover:bg-brand-blue/10">Edit</button>
-            <button type="button" (click)="remove(i)" class="rounded-lg px-2 py-1 text-xs font-semibold text-red-500 hover:bg-red-50">Delete</button>
+            <button
+              type="button"
+              (click)="edit(i)"
+              class="rounded-lg px-2 py-1 text-xs font-semibold text-brand-blue hover:bg-brand-blue/10"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              (click)="remove(i)"
+              class="rounded-lg px-2 py-1 text-xs font-semibold text-red-500 hover:bg-red-50"
+            >
+              Delete
+            </button>
           </td>
         </tr>
       } @empty {
-        <tr><td [attr.colspan]="hasKind ? 5 : 4" class="py-8 text-center text-slate-400">Nothing here yet.</td></tr>
+        <tr>
+          <td
+            [attr.colspan]="hasKind ? 5 : 4"
+            class="py-8 text-center text-slate-400"
+          >
+            Nothing here yet.
+          </td>
+        </tr>
       }
     </tbody>
   </table>

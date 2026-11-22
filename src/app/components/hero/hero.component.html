@@ -1,44 +1,76 @@
-<section class="relative isolate overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue pb-32 pt-44 text-white">
-  <div class="bg-grid-dark absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_right,black_20%,transparent_70%)]"></div>
-  <div class="absolute -right-32 top-10 -z-10 h-[28rem] w-[28rem] animate-float-slow rounded-full bg-brand-orange/25 blur-3xl"></div>
-  <div class="absolute -bottom-40 -left-32 -z-10 h-[28rem] w-[28rem] animate-float rounded-full bg-sky-400/20 blur-3xl"></div>
+<!-- <section
+  class="relative isolate overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue pb-32 pt-44 text-white"
+>
+  <div
+    class="bg-grid-dark absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_right,black_20%,transparent_70%)]"
+  ></div>
+  <div
+    class="absolute -right-32 top-10 -z-10 h-[28rem] w-[28rem] animate-float-slow rounded-full bg-brand-orange/25 blur-3xl"
+  ></div>
+  <div
+    class="absolute -bottom-40 -left-32 -z-10 h-[28rem] w-[28rem] animate-float rounded-full bg-sky-400/20 blur-3xl"
+  ></div>
 
-  <div class="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8">
-    <!-- Left -->
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8"
+  >
+
     <div>
-      <span class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] backdrop-blur">
-        <span class="relative flex h-2 w-2"><span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"></span><span class="relative inline-flex h-2 w-2 rounded-full bg-orange-400"></span></span>
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] backdrop-blur"
+      >
+        <span class="relative flex h-2 w-2"
+          ><span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"
+          ></span
+          ><span
+            class="relative inline-flex h-2 w-2 rounded-full bg-orange-400"
+          ></span
+        ></span>
         Your Trusted Partner for Quality & Creativity
       </span>
 
-      <h1 class="mt-8 font-display text-5xl font-bold leading-[1.08] sm:text-6xl xl:text-7xl">
+      <h1
+        class="mt-8 font-display text-5xl font-bold leading-[1.08] sm:text-6xl xl:text-7xl"
+      >
         Your One-Stop Solution for
-        <span class="text-gradient">Printing, Packaging, Corporate Gifts</span> & More.
+        <span class="text-gradient">Printing, Packaging, Corporate Gifts</span>
+        & More.
       </h1>
 
       <p class="mt-8 max-w-xl text-lg leading-relaxed text-slate-200">
-        We bring ideas to life through quality printing, creative packaging, customized promotional gift solutions,
-        paper tube products, and professional interior design services.
+        We bring ideas to life through quality printing, creative packaging,
+        customized promotional gift solutions, paper tube products, and
+        professional interior design services.
       </p>
 
       <div class="mt-10 flex flex-wrap gap-4">
-        <a routerLink="/contact" class="btn-primary">Get a Quote <app-icon name="arrow-right" class="h-5 w-5" /></a>
+        <a routerLink="/contact" class="btn-primary"
+          >Get a Quote <app-icon name="arrow-right" class="h-5 w-5"
+        /></a>
         <a routerLink="/products" class="btn-ghost">Explore Products</a>
       </div>
 
       <ul class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-200">
         @for (t of trust; track t) {
-          <li class="flex items-center gap-2"><app-icon name="circle-check" class="h-5 w-5 text-orange-300" />{{ t }}</li>
+          <li class="flex items-center gap-2">
+            <app-icon name="circle-check" class="h-5 w-5 text-orange-300" />{{
+              t
+            }}
+          </li>
         }
       </ul>
     </div>
 
-    <!-- Right: floating glass cards -->
     <div class="grid grid-cols-2 gap-4 sm:gap-5">
       @for (c of categories; track c.title; let i = $index) {
-        <div class="group rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition duration-500 hover:-translate-y-2 hover:bg-white/20"
-             [class]="i % 2 === 1 ? 'translate-y-8' : ''">
-          <div class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff7a45] shadow-lg shadow-brand-orange/40 transition group-hover:rotate-6">
+        <div
+          class="group rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl shadow-black/20 backdrop-blur-md transition duration-500 hover:-translate-y-2 hover:bg-white/20"
+          [class]="i % 2 === 1 ? 'translate-y-8' : ''"
+        >
+          <div
+            class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-orange to-[#ff7a45] shadow-lg shadow-brand-orange/40 transition group-hover:rotate-6"
+          >
             <app-icon [name]="c.icon" class="h-6 w-6" />
           </div>
           <p class="mt-5 font-semibold leading-snug">{{ c.title }}</p>
@@ -47,7 +79,137 @@
     </div>
   </div>
 
-  <svg class="absolute inset-x-0 bottom-0 -mb-px w-full text-white" viewBox="0 0 1440 90" preserveAspectRatio="none" fill="currentColor">
-    <path d="M0,90 L0,45 C240,95 480,0 720,35 C960,70 1200,95 1440,40 L1440,90 Z" />
+  <svg
+    class="absolute inset-x-0 bottom-0 -mb-px w-full text-white"
+    viewBox="0 0 1440 90"
+    preserveAspectRatio="none"
+    fill="currentColor"
+  >
+    <path
+      d="M0,90 L0,45 C240,95 480,0 720,35 C960,70 1200,95 1440,40 L1440,90 Z"
+    />
+  </svg>
+</section> -->
+
+<section
+  class="relative isolate overflow-hidden bg-gradient-to-br from-brand-navy via-[#16307a] to-brand-blue pb-32 pt-44 text-white"
+>
+  <div
+    class="bg-grid-dark absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_top_right,black_20%,transparent_70%)]"
+  ></div>
+  <div
+    class="absolute -right-32 top-10 -z-10 h-[28rem] w-[28rem] animate-float-slow rounded-full bg-brand-orange/25 blur-3xl"
+  ></div>
+  <div
+    class="absolute -bottom-40 -left-32 -z-10 h-[28rem] w-[28rem] animate-float rounded-full bg-sky-400/20 blur-3xl"
+  ></div>
+
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-16 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:px-8"
+  >
+    <!-- Left -->
+    <div>
+      <span
+        class="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] backdrop-blur"
+      >
+        <span class="relative flex h-2 w-2"
+          ><span
+            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75"
+          ></span
+          ><span
+            class="relative inline-flex h-2 w-2 rounded-full bg-orange-400"
+          ></span
+        ></span>
+        Your Trusted Partner for Quality & Creativity
+      </span>
+
+      <h1
+        class="mt-8 font-display text-5xl font-bold leading-[1.08] sm:text-6xl xl:text-7xl"
+      >
+        Your One-Stop Solution for
+        <span class="text-gradient">Printing, Packaging, Corporate Gifts</span>
+        & More.
+      </h1>
+
+      <p class="mt-8 max-w-xl text-lg leading-relaxed text-slate-200">
+        We bring ideas to life through quality printing, creative packaging,
+        customized promotional gift solutions, paper tube products, and
+        professional interior design services.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a routerLink="/contact" class="btn-primary"
+          >Get a Quote <app-icon name="arrow-right" class="h-5 w-5"
+        /></a>
+        <a routerLink="/products" class="btn-ghost">Explore Products</a>
+      </div>
+
+      <ul class="mt-12 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-200">
+        @for (t of trust; track t) {
+          <li class="flex items-center gap-2">
+            <app-icon name="circle-check" class="h-5 w-5 text-orange-300" />{{
+              t
+            }}
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Right: about text card -->
+    <div class="relative">
+      <div
+        class="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand-orange/30 to-sky-400/20 blur-2xl"
+      ></div>
+      <div
+        class="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-8 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10"
+      >
+        <div
+          class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-orange via-orange-300 to-sky-300"
+        ></div>
+        <app-icon name="quote" class="h-10 w-10 text-brand-orange" />
+
+        <p
+          class="mt-5 font-display text-2xl font-semibold leading-snug sm:text-[1.7rem]"
+        >
+          At Versatile Support & Supply, we bring ideas to life through
+          <span class="text-gradient"
+            >quality printing, creative packaging, customised promotional
+            gifts</span
+          >
+          and professional interior design.
+        </p>
+
+        <div class="mt-6 space-y-4 leading-relaxed text-slate-200">
+          <p>
+            We also supply paper tube products to meet a wide range of packaging
+            and industrial requirements.
+          </p>
+          <p>
+            Whether you are a corporate organisation, a growing business, a
+            retailer, an institution or an individual customer, we deliver
+            products and services built around your needs.
+          </p>
+          <p>
+            From professional business stationery and branded packaging to
+            promotional merchandise and complete interior projects, every job we
+            take on is guided by
+            <span class="font-semibold text-orange-300"
+              >quality, creativity and customer satisfaction.</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <svg
+    class="absolute inset-x-0 bottom-0 -mb-px w-full text-white"
+    viewBox="0 0 1440 90"
+    preserveAspectRatio="none"
+    fill="currentColor"
+  >
+    <path
+      d="M0,90 L0,45 C240,95 480,0 720,35 C960,70 1200,95 1440,40 L1440,90 Z"
+    />
   </svg>
 </section>

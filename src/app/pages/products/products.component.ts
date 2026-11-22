@@ -17,17 +17,24 @@ export class ProductsComponent {
   // starts with the built-in content, then switches to the database content once the API answers
   products = signal<PublicCategory[]>(PRODUCTS);
   active = signal<string | number>(PRODUCTS[0].id);
-  current = computed(() => this.products().find(p => p.id === this.active()) ?? this.products()[0]);
+  current = computed(
+    () =>
+      this.products().find((p) => p.id === this.active()) ?? this.products()[0],
+  );
 
   constructor() {
-    inject(ApiService).products().subscribe({
-      next: list => {
-        if (list.length) {
-          this.products.set(list);
-          this.active.set(list[0].id);
-        }
-      },
-      error: () => { /* API offline: keep the built-in content */ },
-    });
+    inject(ApiService)
+      .products()
+      .subscribe({
+        next: (list) => {
+          if (list.length) {
+            this.products.set(list);
+            this.active.set(list[0].id);
+          }
+        },
+        error: () => {
+          /* API offline: keep the built-in content */
+        },
+      });
   }
 }
